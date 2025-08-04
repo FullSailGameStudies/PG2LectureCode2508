@@ -6,5 +6,10 @@ public:
 	int minus(int number1, int number2);
 
 	static double mult(double num, double factor);
+
+	int Add(int number1, int number2);
+	int Subtract(int number1, int number2);
+	int Multiply(int number1, int number2);
+	int Divide(int number1, int number2);
 };
 

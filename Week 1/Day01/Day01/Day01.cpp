@@ -78,6 +78,23 @@ int main()
     int diff = t1000.minus(7, 2);
     //std::cout << t1000;
     //Console::Write(t1000);
+    int sum = t1000.Add(5, 2);
+    int n1 = 10, n2 = 3;
+    diff = t1000.Subtract(n1, n2);
+    int product = t1000.Multiply(n1, n2);
+    int div = t1000.Divide(n1, n2);
+
+    Console::Write("5 + 2 = ");
+    Console::WriteLine(sum, ConsoleColor::Green);
+
+    Console::Write("10 - 3 = ");
+    Console::WriteLine(diff, ConsoleColor::Green);
+
+    Console::Write("10 * 3 = ");
+    Console::WriteLine(product, ConsoleColor::Green);
+
+    Console::Write("10 / 3 = ");
+    Console::WriteLine(div, ConsoleColor::Green);
 
 
     /*
@@ -114,11 +131,36 @@ int main()
     std::vector<std::string> names { "Batman", "Bruce Wayne", "The Best" };
     names.push_back("The Greatest Detective");
     names.push_back("The Bat");
-    names.push_back("The Joker");
+    names.push_back("The Joker");//index 5
     names.push_back("Bane");
     names.push_back("Poison Ivy");
+    names.erase(names.begin() + 5);//erase requires an iterator
+    int lastIndex = names.size() - 1;
+    int firstIndex = 0;
+    //lookup an item in a vector
+    std::string bruce = names[1];
+    bruce = names.at(1);
+    //iterator: object to "points" to an item in the vector
+    auto firstIterator = names.begin();
+    auto endIterator = names.end();//the iterator AFTER the last item??????
+    auto lastIterator = names.end() - 1;
 
-
+    std::cout << *firstIterator;// use * to get the item
+    std::cout << "\n\nFOR Loop\n";
+    for (int j = 0; j < names.size(); j++)
+    {
+        Console::WriteLine(names.at(j));
+    }
+    std::cout << "\n\nrange-based for Loop\n";
+    for (auto name : names)
+    {
+        Console::WriteLine(name);
+    }
+    std::cout << "\n\niterator for Loop\n";
+    for (auto iter = names.begin(); iter != names.end(); iter++)
+    {
+        Console::WriteLine(*iter);
+    }
     /*
         CHALLENGE:
 
