@@ -27,12 +27,25 @@ int main()
     //int minAge = 0, maxAge = 120;
     //int age = Input::GetInteger("What is your age?", minAge, maxAge);
     Console::Write("Hello Gotham.\t");
+    Console::Write(5);//prints the item and stays on the current line
+    Console::WriteLine(5);//prints the item and moves the cursor to the beginning of the next line
     Console::Write("Hello PG2!", ConsoleColor::Red, ConsoleColor::Yellow);
-    Console::SetCursorPosition(5, 10);
+    int x = 5, y = 10;
+    Console::SetCursorPosition(x, y);
     Console::WriteLine("Hello Gotham.");
     Console::SetCursorLeft(15);
     Console::WriteLine("Hello PG2!", ConsoleColor::Yellow, ConsoleColor::Red);
     Input::PressEnter("Press enter to continue...", true);
+
+    int width = Console::GetWindowWidth();//capturing the return value
+
+    std::string message = "What is your name?";
+    std::string name = Input::GetString(message);
+    Console::WriteLine(name, ConsoleColor::Green);
+
+    message = "What is your age?";
+    int age = Input::GetInteger(message, 0, 120);
+    Console::WriteLine(std::to_string(age) + "\n");
 
     /*
       Calling a method
@@ -63,6 +76,8 @@ int main()
     //calling a non-static method, use the variable...
     Calculator t1000;
     int diff = t1000.minus(7, 2);
+    //std::cout << t1000;
+    //Console::Write(t1000);
 
 
     /*
