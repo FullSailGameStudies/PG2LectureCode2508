@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include "FullSailCourse.h"
 
 bool postFix(std::string hero)
 {
@@ -20,12 +21,16 @@ float average(const std::vector<int>& scores)
     return sum / scores.size();
 }
 
-void print(std::vector<int>& scores)
+//print is not allowed to modify the const parameter
+void print(const std::vector<int>& scores)
 {
     std::cout << "----SCORES----\n";
     int index = 1;
-    for (int& score : scores)
+    for (auto& score : scores)
+    {
+        //score += 5;
         std::cout << index++ << ". " << score << "\n";
+    }
 }
 
 void printInfo(const std::vector<int>& scores)
@@ -50,9 +55,13 @@ int Update(int num)//copy 1
     num += 10;
     return num;//copy 2
 }
+
+enum Materials
+{
+    Wood = 10, Stone, Copper, Iron, Diamond
+};
 int main()
 {
-
     //  type name;
     int n;// = 5;
     n = 5;
@@ -95,7 +104,18 @@ int main()
 
     */
     std::vector<float> grades;
+    FullSailCourse pg2;
+    pg2.SetName("PG2-2508");
+    std::cout << pg2.GetName() << "\n";
+    pg2.GetGrades(grades);
+    std::cout << "\n\nGrades...\n";
+    for (auto& grade : grades)
+    {
+        std::cout << grade << "\n";
+    }
+    std::cout << "\n\n";
 
+    const int upperLimit = 10;
 
 
     /*
