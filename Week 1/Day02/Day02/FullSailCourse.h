@@ -5,6 +5,7 @@ class FullSailCourse
 {
 public:
 	void GetGrades(std::vector<float>& grades) const;//declaration
+	void PrintGrades(const std::vector<float>& grades) const;
 
 	const std::string& GetName() const
 	{ 
