@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-bool postFix(std::string& hero)
+bool postFix(std::string hero)
 {
     srand((unsigned int)time(NULL));
     int postFixNumber = rand() % 1000;
@@ -20,11 +20,11 @@ float average(const std::vector<int>& scores)
     return sum / scores.size();
 }
 
-void print(const std::vector<int>& scores)
+void print(std::vector<int>& scores)
 {
     std::cout << "----SCORES----\n";
     int index = 1;
-    for (int score : scores)
+    for (int& score : scores)
         std::cout << index++ << ". " << score << "\n";
 }
 
@@ -33,8 +33,44 @@ void printInfo(const std::vector<int>& scores)
     std::cout << "size: " << scores.size() << "\tcapacity: " << scores.capacity() << "\n";
 }
 
+//when to use pass by reference?
+// 1) for any type that is a class
+// 2) when I need to update the variable in a different scope
+// 3) when I want to improve performance
+
+//BENEFITS:
+//- prevents a copy (better performance)
+//- allows a variable to be changed in a different scope
+void PrintMe(int& num)
+{
+    std::cout << num;
+}
+int Update(int num)//copy 1
+{
+    num += 10;
+    return num;//copy 2
+}
 int main()
 {
+
+    //  type name;
+    int n;// = 5;
+    n = 5;
+    n = Update(n);
+    PrintMe(n);//creating an alias. num is an alias to n
+    std::cout << n;
+    //PrintMe(200);//200 is copied to num
+    //copies are "expensive" b/c 
+    // a new variable must be created and the value copied to it
+    // 
+    //a reference variable "points" to an existing variable
+    // type& name = existingVariable;
+    // name is now an ALIAS for another variable
+    int& nRef = n;//nRef is now a new NAME for n. they are the same.
+    nRef += 10;
+    std::cout << n;//15
+    int n2 = 10;
+    nRef = n2;//copies n2 to nRef (n)
     /*
         ╔══════════════════════════════╗
         ║Parameters: Pass by Reference.║
