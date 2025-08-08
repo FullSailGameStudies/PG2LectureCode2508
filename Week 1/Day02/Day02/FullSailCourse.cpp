@@ -18,3 +18,17 @@ void FullSailCourse::PrintGrades(const std::vector<float>& grades) const
 		std::cout << grade << "\n";
 	}
 }
+
+void FullSailCourse::EraseGrades(std::vector<float>& grades, float minGrade) const
+{
+	for (int i = grades.size() - 1; i >= 0; i--)
+	{
+		if (grades[i] < minGrade)
+			grades.erase(grades.begin() + i);
+	}
+}
+
+void FullSailCourse::SetName(const std::string& newName)
+{
+	name = newName;
+}

@@ -3,7 +3,10 @@
 #include <vector>
 #include "FullSailCourse.h"
 
-bool postFix(std::string hero)
+//default parameter
+//optional parameter
+//default argument
+bool postFix(std::string hero = "Batman")//pass by value (copy)
 {
     srand((unsigned int)time(NULL));
     int postFixNumber = rand() % 1000;
@@ -65,9 +68,10 @@ enum Materials
 };
 int main()
 {
+    postFix();
+    postFix("Hulk");
     //  type name;
-    int n;// = 5;
-    n = 5;
+    int n = 5;
     n = Update(n);
     PrintMe(n);//creating an alias. num is an alias to n
     std::cout << n;
@@ -108,9 +112,11 @@ int main()
     */
     std::vector<float> grades;
     FullSailCourse pg2;
-    pg2.SetName("PG2-2508");
+    pg2.SetName();
     //std::cout << pg2.GetName() << "\n";
     pg2.GetGrades(grades);
+    pg2.PrintGrades(grades);
+    pg2.EraseGrades(grades);
     pg2.PrintGrades(grades);
     /*std::cout << "\n\nGrades...\n";
     for (auto& grade : grades)
@@ -131,7 +137,7 @@ int main()
         This is the way you pass by reference and prevent the method from changing the variable.
     */
     std::vector<int> highScores;
-    //highScores.reserve(10);//sets the capacity to 10
+    highScores.reserve(10);//sets the capacity to 10
     printInfo(highScores);//size: 0?  capacity: ?
     for (int i = 0; i < 10; ++i)
     {
