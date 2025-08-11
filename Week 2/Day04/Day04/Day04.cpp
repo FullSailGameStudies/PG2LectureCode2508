@@ -19,8 +19,13 @@ std::string toUpper(const std::string& original)
 
 void recursiveLoop(int N)
 {
-    recursiveLoop(N + 1);
-}
+    if (N < 20) //recursive methods need an exit condition (base case)
+    {
+        std::cout << N << "\n";        
+        recursiveLoop(N + 1);
+        std::cout << N << "\n";
+    }
+}//last line of the method. returns to whoever called it.
 
 unsigned long factorial(unsigned int N)
 {
@@ -55,8 +60,43 @@ unsigned long factorial(unsigned int N)
 
 */
 
+
+void Bats(int i)
+{
+    if(i < 100)//exit condition
+    {
+        std::cout << (char)78 << (char)65 << ' ';
+        Bats(i+1);//recursive case
+        //post-increment. uses i THEN it increments i
+        //pre-increment. increments i then uses it
+
+    }
+}
+void ReverseWord(const std::string& word, int index=0)
+{
+    if (index >= word.size()) return;
+    ReverseWord(word, index + 1);
+    std::cout << word[index];
+}
+
 int main()
 {
+    ReverseWord("Batman");
+    std::cout << "\n\n";
+    //for, foreach (range-based), reverse for, iterator for
+    //while, do-while, recursion
+    int x = 10;
+    for (size_t i = 0; i < x; i++)
+    {
+        std::cout << "Do something" << i << "\n";
+    }
+    while (x < 20)//when the condition is false, we stop looping
+    {
+        std::cout << "Do something";
+        x++;
+    }
+
+
     std::vector<std::string> names = { "Wonder Woman", "Superman", "Batman", "Flash", "Aquaman" };
     //call your BubbleSort on the names vector.
 
@@ -99,7 +139,8 @@ int main()
             }
     */
     //call Bats here.
-
+    int i = 0;
+    Bats(i);
     char c[] = { '\n', 66, 65, 84, 77, 65, 78, 33, 33 };
     for (auto ch : c) std::cout << ch;
 
