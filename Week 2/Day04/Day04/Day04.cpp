@@ -59,6 +59,42 @@ unsigned long factorial(unsigned int N)
         end procedure
 
 */
+//procedure bubbleSort(A : list of sortable items)
+void bubbleSort(std::vector<std::string>& A)
+{
+    //n := length(A)
+    int n = A.size();
+    //repeat
+    bool swapped = false;
+    do
+    {
+        //swapped: = false
+        swapped = false;
+        //for i := 1 to n - 1 inclusive do
+        for (int i = 1; i <= n - 1; i++)
+        {
+            //if A[i - 1] > A[i] then
+            if (A[i - 1] > A[i])
+            {
+                //swap(A, i - 1, i) //TODO: figure out hot to swap
+                ////1. create a temp variable to store 1 value
+                ////  temp variable has to be the same type as the items stored in the vector
+                //std::string temp = A[i - 1];
+                ////2. copy the other value to the first position
+                //A[i - 1] = A[i];
+                ////3. copy the temp value into the vector at the second position
+                //A[i] = temp;
+                //OR...
+                std::swap(A[i - 1], A[i]);
+                
+                //swapped = true
+                swapped = true;
+            }//end if
+        }//end for
+        //n := n - 1
+        n = n - 1; //--n  n--  n-=1
+    } while (swapped);
+}//end procedure
 
 
 void Bats(int i)
@@ -100,12 +136,13 @@ int main()
     std::vector<std::string> names = { "Wonder Woman", "Superman", "Batman", "Flash", "Aquaman" };
     //call your BubbleSort on the names vector.
 
-    Console::WriteLine("--UNSORTED--", ConsoleColor::Yellow);
+    Console::WriteLine("\n\n--UNSORTED--", ConsoleColor::Yellow);
     //print the sorted vector.
     for (auto& name : names)
         std::cout << name << "\n";
 
     //call BubbleSort
+    bubbleSort(names);
 
     Console::WriteLine("--SORTED--", ConsoleColor::Yellow);
     //print the sorted vector.
