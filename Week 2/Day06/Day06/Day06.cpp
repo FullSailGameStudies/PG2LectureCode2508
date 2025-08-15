@@ -5,6 +5,8 @@
 #include <string>
 #include <map>
 #include <iomanip>
+#include <Console.h>
+#include <Input.h>
 
 
 enum class Weapon
@@ -12,6 +14,24 @@ enum class Weapon
     Sword, Axe, Spear, Mace
 };
 
+void PrintGrades(const std::map<std::string, double>& grades)
+{
+    std::cout << "\n\nPG2 2508\n";
+    for (auto& [name, grade] : grades)
+    {
+        std::cout << std::setw(10) << std::left << name << " ";
+        Console::SetForegroundColor(
+            //ternary operator -shorthand for if-else  (condition) ? true-block : false-block
+            (grade < 59.5) ? ConsoleColor::Red :
+            (grade < 69.5) ? ConsoleColor::Yellow :
+            (grade < 79.5) ? ConsoleColor::Cyan :
+            (grade < 89.5) ? ConsoleColor::Magenta :
+            ConsoleColor::Green
+        );
+        std::cout << std::setw(7) << std::right << grade << "\n";
+        Console::Reset();
+    }
+}
 
 int main()
 {
@@ -27,20 +47,20 @@ int main()
         erase(key) -- returns the # of items removed
 
     */
-    std::map<Weapon, int> backpack;
-    auto inserted = backpack.insert(std::make_pair(Weapon::Sword, 5));
-    backpack[Weapon::Axe] = 3;
+    std::map<Weapon, int> dorasBackpack;
+    auto inserted = dorasBackpack.insert(std::make_pair(Weapon::Sword, 5));
+    dorasBackpack[Weapon::Axe] = 3;
 
-    size_t numberRemoved = backpack.erase(Weapon::Sword);
+    size_t numberRemoved = dorasBackpack.erase(Weapon::Mace);
     if (numberRemoved > 0)
         std::cout << "The Swords were removed.\n";
     else
         std::cout << "Sword was not found in the map.\n";
 
-    std::map<Weapon, int>::iterator found = backpack.find(Weapon::Axe);
-    if (found != backpack.end())
+    std::map<Weapon, int>::iterator found = dorasBackpack.find(Weapon::Axe);
+    if (found != dorasBackpack.end())
     {
-        backpack.erase(found);
+        dorasBackpack.erase(found);
         std::cout << "The Axes were removed.\n";
     }
     else
@@ -73,4 +93,25 @@ int main()
     grades["Clark"] = rand() % 101;
     grades["Arthur"] = rand() % 101;
     grades["Barry"] = rand() % 101;
+
+    do
+    {
+        PrintGrades(grades);
+        std::string student = Input::GetString("Student to drop: ");
+        if (student.empty()) break;
+
+        student[0] = std::toupper(student[0]);
+        auto foundStudent = grades.find(student);
+        if (foundStudent != grades.end())
+        {
+            std::cout << student << " had a grade of " << foundStudent->second << ". Dropping...";
+            grades.erase(foundStudent);
+            std::cout << "Dropped!\n";
+        }
+        else {
+            std::cout << student << " is not in the course.\n";
+        }
+
+
+    } while (true);
 }
