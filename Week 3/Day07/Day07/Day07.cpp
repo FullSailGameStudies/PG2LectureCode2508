@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include "FullSailCourse.h"
+#include "Card.h"
 
 
 /*              CLASSESS
@@ -41,9 +43,26 @@
 
 */
 
+//COLOR: red, green, blue, alpha
+struct COLOR
+{
+    //public by default
+    int red, green, blue, alpha;
+    COLOR(int r, int g, int b, int a) : red(r), green(g), blue(b), alpha(a)
+    { }
+};
+COLOR exterior, interior;
 
 int main()
 {
+    exterior.red = 255;
+
+    //creating an object of type FulSailCourse
+    //creating an instance
+    FullSailCourse pg2("PG2", "2508");
+    Card aces(CardFace::A, "Hearts");
+
+
     /*
         Lecture code: add a Car class
     
