@@ -15,13 +15,44 @@
 //  constructor
 //create a knife object in main
 
+//override the showMe method for the Knife class
+
+class Print
+{
+public:
+	//overloading (compile-time polymorphic)
+	void show(int i) { std::cout << "show1\n" << i; }
+	void show(double d) { std::cout << "show1\n" << d; }
+	void show(int i, int i2) { std::cout << "show1\n" << i << i2; }
+	void show() { std::cout << "show2\n"; }
+	//bool show() { std::cout << "show2\n"; }
+};
 int main()
 {
+	Print p;
+	p.show();
+	p.show(5);
+	p.show(5,2);
+	p.show(5.3);
 	int range = 10, damage = 20;
 	Weapon wpn(range, damage);
 	int rounds = 5, mag = 15;
 	Pistol johnWickSpecial(rounds, mag, range, damage);
+	Pistol p2(1, 5, 5, 10);
+	johnWickSpecial = p2;//we could overload the assignment operator
 	Knife stabby(5, true, 3, 10);
+
+	std::cout << "\n\n";
+	//RUN-TIME check
+	johnWickSpecial.showMe();//we need to show Pistol info too
+	stabby.showMe();//we need to show Knife info too
+
+
+	//Friday preview...
+	//Weapon* wpnPtr = &johnWickSpecial;
+	//wpnPtr->showMe();//which one to call???
+	//wpnPtr = &stabby;
+	//wpnPtr->showMe();//which one to call???
 	/*
 		╔═══════════════╗
 		║  Inheritance  ║

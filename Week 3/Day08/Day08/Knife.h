@@ -8,13 +8,20 @@ public:
 		length_(length), serrated_(serrated)
 	{
 	}
-	int Length() const { return length_; }
+	void showMe() override;
+	int Length() const 
+	{ 
+		return length_; 
+	}
 	void Length(int length)
 	{
 		if (length > 0 && length <= 12)
 			length_ = length;
 	}
-	bool Serrated() const { return serrated_; }
+	bool Serrated() const 
+	{ 
+		return serrated_; 
+	}
 	void Serrated(bool serrated)
 	{
 		serrated_ = serrated;
