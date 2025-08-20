@@ -6,10 +6,22 @@
 #include "Inheritance.h"
 #include "Polymorphism.h"
 #include "Car.h"
+#include "Pistol.h"
+#include "Knife.h"
 
+//knife class:
+//  length, serrated
+//  getters/setters
+//  constructor
+//create a knife object in main
 
 int main()
 {
+	int range = 10, damage = 20;
+	Weapon wpn(range, damage);
+	int rounds = 5, mag = 15;
+	Pistol johnWickSpecial(rounds, mag, range, damage);
+	Knife stabby(5, true, 3, 10);
 	/*
 		╔═══════════════╗
 		║  Inheritance  ║
