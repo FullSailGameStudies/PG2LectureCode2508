@@ -8,6 +8,7 @@
 #include "Car.h"
 #include "Pistol.h"
 #include "Knife.h"
+#include <vector>
 
 //knife class:
 //  length, serrated
@@ -35,8 +36,63 @@ void Counter()
 	std::cout << i << " ";
 	i++;
 }
+
+void Sample(int*& numPtr)
+{
+	numPtr = new int(25);
+	std::cout << *numPtr << "\n\n";
+	//(*numPtr)++;
+}
 int main()
 {
+	int** numPtrPtr;
+
+	int n = 5;
+	int* numPtr3;
+	numPtrPtr = &numPtr3;
+	Sample(numPtr3);
+	std::cout << *numPtr3 << "\n\n";
+	std::cout << n << "\n\n";
+	n++;
+	int* nPtr;//pointer to a memory location
+	//pointers can be either 4-bytes or 8-bytes
+	// if the app is 32-bit, 4-bytes
+	// if the app is 64-bit, 8-bytes
+	//
+	// Memory locations:
+	//   1) stack memory (local variables)
+	//		stack variables are destroyed when they go out-of-scope
+	//   2) heap memory (dynamic variables)
+	//		heap variables are destroyed when you delete them
+	//		heap variables are not scope bound
+	//		YOU are responsible for cleaning up your junk
+	//		if you do NOT, you will have a memory leak!
+
+	//pointer to stack memory
+	//& on the right-hand side, it is called "address-of"
+	nPtr = &n;
+	std::cout << nPtr << "\n\n";
+
+	//pointer to heap memory (dynamic memory)
+	//  '= new' that is creating heap memory
+	{
+		int* nPtr2 = new int(10);
+		delete nPtr2;
+	}//the int on the heap is still alive!
+
+
+	//accessing the values that the pointer points to
+	//  use * or -> to dereference the pointer
+	std::cout << *nPtr << "\n\n";
+
+	//cleaning up the heap
+	//   use the delete keyword
+	nPtr = new int(25);
+	delete nPtr;//deletes the int at that memory location
+	nPtr = nullptr;
+	if(nPtr != nullptr)
+		std::cout << *nPtr << "\n\n";
+
 	for (int i = 0; i < 10; i++)
 	{
 		Counter();
@@ -58,13 +114,49 @@ int main()
 	//RUN-TIME check
 	johnWickSpecial.showMe();//we need to show Pistol info too
 	stabby.showMe();//we need to show Knife info too
+	Pistol::Report();
 
+	//stabby = johnWickSpecial;
 
 	//Friday preview...
-	//Weapon* wpnPtr = &johnWickSpecial;
-	//wpnPtr->showMe();//which one to call???
-	//wpnPtr = &stabby;
-	//wpnPtr->showMe();//which one to call???
+	//upcasting: 
+	//	casting from a DERIVED type (Pistol) to a base type (Weapon)
+	Weapon* wpnPtr = &johnWickSpecial;//UPCAST
+	(*wpnPtr).showMe();
+	wpnPtr->showMe();//which one to call???
+	wpnPtr = &stabby;
+	wpnPtr->showMe();//which one to call???
+
+	//create the Pistol object on the heap
+	Pistol* pPistol = new Pistol(rounds, mag, range, damage);
+	delete pPistol;
+
+	std::vector<Weapon*> backpack;
+	backpack.push_back(&johnWickSpecial);
+	backpack.push_back(&stabby);
+	std::cout << "\nBACKPACK:\n";
+	for (auto& wpnPtr : backpack)
+	{
+		wpnPtr->showMe();//run-time polymorphism
+	}
+
+	//use std::make_unique in a similar way
+	{
+		std::unique_ptr<Pistol> uPistol = std::make_unique<Pistol>(rounds, mag, range, damage);
+		
+		//to use another variable for the same object, you must move it
+		std::unique_ptr<Pistol> uPistol2 = std::move(uPistol);//uPistol no longer owns the memory
+
+		uPistol2->showMe();
+
+	}//the unique_ptr automatically deletes the memory when it goes out of scope
+
+
+	int nVal = 5;
+	long lval = nVal;//implicit cast
+	double dVal = 5.3;
+	nVal = (int)dVal;//explicit cast
+
 	/*
 		╔═══════════════╗
 		║  Inheritance  ║
