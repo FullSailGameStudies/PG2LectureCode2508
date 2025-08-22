@@ -17,6 +17,7 @@ public:
 	//OVERRIDE the virtual method
 	//  the declaration MUST match the base declaration
 	void showMe() override;//override is optional
+	int calcDamage() override;
 private:
 	int ammoCount_;
 	int ammoCapacity_;

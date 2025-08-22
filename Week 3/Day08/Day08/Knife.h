@@ -9,6 +9,7 @@ public:
 	{
 	}
 	void showMe() override;
+	int calcDamage() override;
 	int Length() const 
 	{ 
 		return length_; 

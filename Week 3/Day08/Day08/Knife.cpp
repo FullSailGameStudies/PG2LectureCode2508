@@ -7,3 +7,8 @@ void Knife::showMe()
 	Weapon::showMe();
 	std::cout << "\n";
 }
+
+int Knife::calcDamage()
+{
+	return Weapon::calcDamage();
+}

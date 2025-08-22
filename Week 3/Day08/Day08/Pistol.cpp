@@ -14,3 +14,8 @@ void Pistol::showMe()
 	Weapon::showMe();
 	std::cout << "\n";
 }
+
+int Pistol::calcDamage()
+{
+	return Weapon::calcDamage();
+}

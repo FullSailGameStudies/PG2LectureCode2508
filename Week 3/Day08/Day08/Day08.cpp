@@ -27,15 +27,27 @@ public:
 	void show() { std::cout << "show2\n"; }
 	//bool show() { std::cout << "show2\n"; }
 };
+
+void Counter()
+{
+	//static data lives for the lifetime of the app (while the app is running)
+	static int i = 0;
+	std::cout << i << " ";
+	i++;
+}
 int main()
 {
+	for (int i = 0; i < 10; i++)
+	{
+		Counter();
+	}
 	Print p;
 	p.show();
 	p.show(5);
 	p.show(5,2);
 	p.show(5.3);
 	int range = 10, damage = 20;
-	Weapon wpn(range, damage);
+	//Weapon wpn(range, damage);
 	int rounds = 5, mag = 15;
 	Pistol johnWickSpecial(rounds, mag, range, damage);
 	Pistol p2(1, 5, 5, 10);
