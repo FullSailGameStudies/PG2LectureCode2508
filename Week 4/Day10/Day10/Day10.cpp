@@ -18,8 +18,13 @@
 
     3 things are required for File I/O:
     1) Open the file
+        1.1) where is the file? file path
+        1.2) what mode to open the file in?
+        1.3) did it work? (don't assume it did)
     2) read/write to the file
-    3) close the file
+    3) CLOSE the file. files are system resources
+        OS will create a file HANDLE if it can open the file
+        RULE: close the file ASAP
 
 
 
@@ -27,6 +32,93 @@
 int main()
 {
     std::cout << "Hello PG2!\n";
+
+    std::string fileName = "2508.csv";
+    std::string path = "C:/temp/2508/";
+    std::string finalPath = path + fileName;
+
+    // fstream (input and output) logging 
+    // ifstream (input), 
+    // ofstream (output)
+    // 
+    // <fstream> header
+
+    //attempts to open the file in output mode
+    //will overwrite the file if it is there already
+    //unless you open it to append to the end
+    //steps 1.1 and 1.2
+    //opens a text file
+    std::ofstream outFile(finalPath);
+
+    //step 1.3) did it work?
+    if (outFile.is_open())
+    {
+        char delimiter = '?';
+        //step 2) write to the file
+        //look like using cout
+        //use the << (insertion operator) to output data to the file
+        outFile << "Batman rules. Aquaman smells." << delimiter << 5;
+        outFile << delimiter << 13.7 << delimiter << "true" << delimiter << "The end.";
+    }
+    else
+    {
+        std::cout << finalPath << " could not be opened.\n";
+    }
+
+    //step 3) CLOSE the file
+    outFile.close();
+
+    //step 1) open the file
+    std::ifstream inFile(finalPath);
+    //step 1.3) did it work?
+    if (inFile.is_open())
+    {
+        //step 2) read the file. Parse the incoming data.
+        //use getline to read a line from the file
+        std::string line;
+        //reads until it finds a \n OR the end of the file
+        std::getline(inFile, line);
+        //parse the string for the pieces of data
+        //use getline to get each piece of data
+        std::stringstream lineStream(line);
+        std::string data;
+        //give it a different delimiter 
+        //reads until it finds '?' OR the end of the stream
+        std::getline(lineStream, data, '?');
+        std::cout << data << "\n";
+
+
+        try
+        {
+            std::getline(lineStream, data, '?');
+            int iData = std::stoi(data);
+            std::cout << iData << "\n";
+
+            std::getline(lineStream, data, '?');
+            double dData = std::stod(data);
+            std::cout << dData << "\n";
+
+            std::getline(lineStream, data, '?');
+            bool bData = std::stoi(data);
+            std::cout << bData << "\n";
+        }
+        //can have multiple catch blocks
+        //the more SPECIFIC catch blocks come first
+        catch (const std::exception& ex)
+        { //handling the exception
+            std::cout << "Exception thrown while reading the data.\n";
+            std::cout << ex.what() << "\n";
+        }
+        std::getline(lineStream, data, '?');
+        std::cout << data << "\n";
+    }
+    else
+    {
+        std::cout << finalPath << " could not be opened.\n";
+    }
+
+    //step 3) CLOSE the file
+    inFile.close();
 
     /*
 
